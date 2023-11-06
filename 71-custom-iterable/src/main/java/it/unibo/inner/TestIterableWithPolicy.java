@@ -1,11 +1,13 @@
 package it.unibo.inner;
 
 import it.unibo.inner.api.IterableWithPolicy;
+import it.unibo.inner.impl.IterableWithPolicyImpl;
 import it.unibo.inner.test.api.Product;
 import it.unibo.inner.test.impl.ProductImpl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.function.Predicate;
 
 import static it.unibo.inner.test.Assertions.assertContentEqualsInOrder;
@@ -15,11 +17,11 @@ public class TestIterableWithPolicy {
     private TestIterableWithPolicy() {}
 
     private static <T> IterableWithPolicy<T> getIterableWithPolicy(T[] elements, Predicate<T> filter) {
-        return null; // TODO: return the implementation of IterableWithPolicy
+        return new IterableWithPolicyImpl<>(elements, filter); // TODO: return the implementation of IterableWithPolicy
     }
 
     private static <T> IterableWithPolicy<T> getIterableWithPolicy(T[] elements) {
-        return null; // TODO: return the implementation of IterableWithPolicy
+        return new IterableWithPolicyImpl<>(elements); // TODO: return the implementation of IterableWithPolicy
     }
 
     public static void main(String[] args) {
@@ -102,5 +104,19 @@ public class TestIterableWithPolicy {
 
         IterableWithPolicy<Product> onlyProductOne = getIterableWithPolicy(productsTest, takeOnlyProductOne);
         assertContentEqualsInOrder(onlyProductOne, Arrays.asList(prod1));
+
+        /*
+        IterableWithPolicy<Integer> even1Iterable = getIterableWithPolicy(test1, filterEven);
+        Iterator<Integer> it = even1Iterable.iterator();
+        while(it.hasNext()) {
+            it.hasNext();
+            it.hasNext();
+            it.hasNext();
+            it.hasNext();
+            it.hasNext();
+            it.next();
+        }        
+        assertContentEqualsInOrder(even1Iterable, Arrays.asList(2, 4, 6, 8));
+         */
     }
 }
